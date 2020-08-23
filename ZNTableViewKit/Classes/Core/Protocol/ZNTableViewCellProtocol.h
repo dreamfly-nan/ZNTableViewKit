@@ -12,12 +12,16 @@
 #import <UIKit/UIKit.h>
 #import "ZNTableViewActionProtocol.h"
 
-@protocol ZNBaseTableViewCellProtocol <NSObject>
+@protocol ZNBaseViewProtocol <NSObject>
+
+- (void)setSubViewAction:(id<ZNTableViewActionProtocol>) action;
+
+@end
+
+@protocol ZNBaseTableViewCellProtocol <ZNBaseViewProtocol>
 
 - (void)loadModel:(id) model
     withIndexPath:(NSIndexPath *) indexPath;
-
-- (void)setSubViewAction:(id<ZNTableViewActionProtocol>) action;
 
 @end
 

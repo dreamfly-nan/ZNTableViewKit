@@ -7,8 +7,13 @@
 //
 
 #import "ZNViewController.h"
+#import <ZNTableViewKit/ZNTableViewKit.h>
 
 @interface ZNViewController ()
+
+@property (nonatomic , strong) UITableView * tableView;
+
+@property (nonatomic , strong) ZNTableViewKit * tableViewKit;
 
 @end
 
@@ -20,10 +25,13 @@
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - get
+
+- (UITableView *)tableView{
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+    }
+    return _tableView;
 }
 
 @end

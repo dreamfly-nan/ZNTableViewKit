@@ -35,7 +35,7 @@ SPEC CHECKSUMS:
   "Expecta+Snapshots": dcff217eef506dabd6dfdc7864ea2da321fafbb8
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
   Specta: 3e1bd89c3517421982dc4d1c992503e48bd5fe66
-  ZNTableViewKit: 0dcf025884f7428255caf583fb05e791356e890c
+  ZNTableViewKit: 89f48b2bb46a684c0f53ef2ca561f868cf9d52c0
 
 PODFILE CHECKSUM: 7679fecb676dca43b8d3dcbc10f0a8a175406cd8
 

@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ZNTableViewKit'
-  s.version          = '1.0.0'
+  s.version          = '1.0.1'
   s.summary          = 'A short description of ZNTableViewKit.'
 
 # This description is used to generate tags and improve search results.
@@ -30,7 +30,7 @@ TODO: Add long description of the pod here.
 
   s.ios.deployment_target = '8.0'
 
-  s.source_files = 'ZNTableViewKit/Classes/**/*'
+  s.source_files = 'ZNTableViewKit/Classes/**/*.{h,m}'
   
   # s.resource_bundles = {
   #   'ZNTableViewKit' => ['ZNTableViewKit/Assets/*.png']

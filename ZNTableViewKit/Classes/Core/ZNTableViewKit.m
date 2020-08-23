@@ -115,15 +115,6 @@ UITableViewDataSource>
     }
 }
 
-/// 刷新tableView
-- (void)reload{
-    ////策略执行
-    for (Class<ZNTableViewStrategyProtocol> strategy in self.registerStrategyModels.allValues) {
-        [self.selfManager reloadWithStrategy:strategy];
-    }
-    [self.tableView reloadData];
-}
-
 /// 添加事件
 /// @param action <#action description#>
 - (void)addAction:(id<ZNTableViewActionProtocol>) action{
@@ -217,6 +208,27 @@ UITableViewDataSource>
         [self.selfManager managerHeightForFooterInSection:section];
     }
     return 0.01f;
+}
+
+#pragma mark - ZNTableViewKitProtocol
+
+/// 刷新tableView
+- (void)reload{
+    ////策略执行
+    for (Class<ZNTableViewStrategyProtocol> strategy in self.registerStrategyModels.allValues) {
+        [self.selfManager reloadWithStrategy:strategy];
+    }
+    [self.tableView reloadData];
+}
+
+/// 获取数据源
+- (id<ZNTableViewDataSourceProtocol>)getDataLoader{
+    return self.selfManager.dataLoader;
+}
+
+/// 获取当前的Tableview
+- (UITableView *)getCurrentTableView{
+    return self.tableView;
 }
 
 #pragma mark - get
