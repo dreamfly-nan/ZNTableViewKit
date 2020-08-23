@@ -76,7 +76,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic , weak) id<ZNTableViewLayoutProtocol,ZNTableViewLunchProtocol> viewHelper;
 
-@property(nonatomic , weak) id<ZNTableViewDataSourceDelegate> dataLoader;
+@property(nonatomic , weak) id<ZNTableViewDataSourceProtocol> dataLoader;
 
 @property(nonatomic , weak) id<ZNTableViewActionProtocol> cellAction;
 

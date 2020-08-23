@@ -38,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param tableView <#tableView description#>
 - (instancetype)initWithViewHelper:(id<ZNTableViewLayoutProtocol,
                                     ZNTableViewLunchProtocol> ) viewHelper
-                        dataLoader:(id<ZNTableViewDataSourceDelegate>) dataLoader
+                        dataLoader:(id<ZNTableViewDataSourceProtocol>) dataLoader
                          tableView:(UITableView *) tableView;
 
 /// 当前tableview的处理对象

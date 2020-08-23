@@ -10,7 +10,7 @@
 #import <UIKit/UIKit.h>
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol ZNTableViewDataSourceDelegate <NSObject>
+@protocol ZNTableViewDataSourceProtocol <NSObject>
 
 /// 重设数据源
 /// @param array <#array description#>
@@ -41,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface ZNTableViewDataLoader : NSObject <ZNTableViewDataSourceDelegate>
+@interface ZNTableViewDataLoader : NSObject <ZNTableViewDataSourceProtocol>
 
 - (instancetype)initSingleGroupWithDataSource:(NSArray *) dataSource;
 

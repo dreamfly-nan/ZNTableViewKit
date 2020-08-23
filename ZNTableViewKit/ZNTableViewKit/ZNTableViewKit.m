@@ -25,7 +25,7 @@ UITableViewDataSource>
 
 @property(nonatomic , strong) id<ZNTableViewLayoutProtocol,ZNTableViewLunchProtocol> viewHelper;
 
-@property(nonatomic , strong) id<ZNTableViewDataSourceDelegate> dataLoader;
+@property(nonatomic , strong) id<ZNTableViewDataSourceProtocol> dataLoader;
 
 /// 事件管理
 @property(nonatomic , strong) id<ZNTableViewActionProtocol> actionDelegate;
@@ -61,7 +61,7 @@ UITableViewDataSource>
 /// @param dataLoader <#dataLoader description#>
 - (instancetype)initWithViewHelper:(id<ZNTableViewLayoutProtocol,
                                     ZNTableViewLunchProtocol> ) viewHelper
-                        dataLoader:(id<ZNTableViewDataSourceDelegate>) dataLoader
+                        dataLoader:(id<ZNTableViewDataSourceProtocol>) dataLoader
                          tableView:(UITableView *) tableView{
     self.selfManager.viewHelper = viewHelper;
     self.selfManager.dataLoader = dataLoader;
