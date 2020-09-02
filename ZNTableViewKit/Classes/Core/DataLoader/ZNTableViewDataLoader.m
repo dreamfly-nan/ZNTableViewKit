@@ -41,7 +41,15 @@ typedef NS_ENUM(NSInteger,ZNTableViewDataType){
 
 - (BOOL)haveData {
     if (self.datasoure.count > 0) {
-        return YES;
+        for (id model in self.datasoure) {
+            if ([model isKindOfClass:[NSArray class]] || [model isKindOfClass:[NSMutableArray class]]) {
+                NSArray * array = model;
+                if (array.count > 0) {
+                    return YES;
+                }
+            }
+        }
+        return NO;
     }
     return NO;
 }
