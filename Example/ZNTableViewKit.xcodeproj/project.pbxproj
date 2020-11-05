@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18469A6F2553A9380022047E /* TestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18469A6E2553A9380022047E /* TestTableViewCell.m */; };
+		18469A752553A93F0022047E /* ActionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 18469A732553A93F0022047E /* ActionTest.m */; };
+		18469A7B2553A9450022047E /* StrategyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 18469A792553A9450022047E /* StrategyTest.m */; };
+		18469A802553A95A0022047E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18469A7E2553A95A0022047E /* ViewController.m */; };
 		4C9CC894F14F2BE85A880098 /* Pods_ZNTableViewKit_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D94ACE0B65DB1AB532CBE0C4 /* Pods_ZNTableViewKit_Example.framework */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
@@ -37,6 +41,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		18469A6D2553A9380022047E /* TestTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestTableViewCell.h; sourceTree = "<group>"; };
+		18469A6E2553A9380022047E /* TestTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestTableViewCell.m; sourceTree = "<group>"; };
+		18469A732553A93F0022047E /* ActionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionTest.m; sourceTree = "<group>"; };
+		18469A742553A93F0022047E /* ActionTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionTest.h; sourceTree = "<group>"; };
+		18469A792553A9450022047E /* StrategyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StrategyTest.m; sourceTree = "<group>"; };
+		18469A7A2553A9450022047E /* StrategyTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StrategyTest.h; sourceTree = "<group>"; };
+		18469A7E2553A95A0022047E /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		18469A7F2553A95A0022047E /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		1E6E09189F8CB69BAC9A5626 /* Pods-ZNTableViewKit_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZNTableViewKit_Tests.debug.xcconfig"; path = "Target Support Files/Pods-ZNTableViewKit_Tests/Pods-ZNTableViewKit_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		4E4D28DD8A88C0029EE5021A /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* ZNTableViewKit_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZNTableViewKit_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -95,6 +107,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		18469A722553A93F0022047E /* Action */ = {
+			isa = PBXGroup;
+			children = (
+				18469A732553A93F0022047E /* ActionTest.m */,
+				18469A742553A93F0022047E /* ActionTest.h */,
+			);
+			path = Action;
+			sourceTree = "<group>";
+		};
+		18469A782553A9450022047E /* Strategy */ = {
+			isa = PBXGroup;
+			children = (
+				18469A792553A9450022047E /* StrategyTest.m */,
+				18469A7A2553A9450022047E /* StrategyTest.h */,
+			);
+			path = Strategy;
+			sourceTree = "<group>";
+		};
 		6003F581195388D10070C39A = {
 			isa = PBXGroup;
 			children = (
@@ -132,6 +162,12 @@
 		6003F593195388D20070C39A /* Example for ZNTableViewKit */ = {
 			isa = PBXGroup;
 			children = (
+				18469A782553A9450022047E /* Strategy */,
+				18469A722553A93F0022047E /* Action */,
+				18469A6D2553A9380022047E /* TestTableViewCell.h */,
+				18469A6E2553A9380022047E /* TestTableViewCell.m */,
+				18469A7F2553A95A0022047E /* ViewController.h */,
+				18469A7E2553A95A0022047E /* ViewController.m */,
 				6003F59C195388D20070C39A /* ZNAppDelegate.h */,
 				6003F59D195388D20070C39A /* ZNAppDelegate.m */,
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
@@ -389,9 +425,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18469A802553A95A0022047E /* ViewController.m in Sources */,
 				6003F59E195388D20070C39A /* ZNAppDelegate.m in Sources */,
+				18469A6F2553A9380022047E /* TestTableViewCell.m in Sources */,
+				18469A7B2553A9450022047E /* StrategyTest.m in Sources */,
 				6003F5A7195388D20070C39A /* ZNViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
+				18469A752553A93F0022047E /* ActionTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
