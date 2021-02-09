@@ -36,6 +36,9 @@ UITableViewDataSource>
 ///策略
 @property(nonatomic , strong) NSMutableDictionary<NSString *, id<ZNTableViewStrategyProtocol> > * registerStrategyModels;
 
+///tableview的背景View
+@property(nonatomic , strong) UIView * backgroundView;
+
 @end
 
 @implementation ZNTableViewKit
@@ -80,8 +83,41 @@ UITableViewDataSource>
     self.tableView = tableView;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.backgroundView = self.backgroundView;
+    self.selfManager.tableView = tableView;
+    
     ///保底注册
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];
+    
+    @weakify(self);
+    self.dataLoader.loadFinishBlock = ^(NSError * error,BOOL isLastPage) {
+        @strongify(self)
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self hiddenLoadView];
+            [self.selfManager.headRefresh endRefreshing];
+            if (isLastPage) {
+                [self.selfManager.footerRefresh endRefreshingWithNoMoreData];
+            }else{
+                [self.selfManager.footerRefresh endRefreshing];
+            }
+            
+            if (error) {
+                self.selfManager.errorView.hidden = NO;
+                self.selfManager.loadView.hidden = YES;
+                self.selfManager.emptyView.hidden = YES;
+            }else{
+                self.selfManager.errorView.hidden = YES;
+            }
+            [self reload];
+            
+            if (self.ZNDelegate && [self.ZNDelegate respondsToSelector:@selector(loadDataFinish)]) {
+                [self.ZNDelegate loadDataFinish];
+            }
+            
+        });
+        
+    };
     return self;
 }
 
@@ -122,6 +158,77 @@ UITableViewDataSource>
     self.selfManager.cellAction = action;
     ///挂在这里，应该是Action没有给一个 @property(nonatomic , weak) ZNTableViewKit * tableViewKit;
     self.actionDelegate.tableViewKit = self;
+}
+
+/// 空视图与错误视图的接入
+/// @param emptyView <#emptyView description#>
+- (void)setEmptyView:(UIView*) emptyView{
+    self.selfManager.emptyView = emptyView;
+    [self.backgroundView addSubview:emptyView];
+    [emptyView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.backgroundView);
+    }];
+}
+
+/// 错误视图接入
+/// @param errorView <#errorView description#>
+- (void)setErrorView:(UIView *) errorView{
+    self.selfManager.errorView = errorView;
+    [self.backgroundView addSubview:errorView];
+    [errorView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.backgroundView);
+    }];
+}
+
+/// 加载图接入
+/// @param loadView <#loadView description#>
+- (void)setLoadView:(UIView *) loadView{
+    self.selfManager.loadView = loadView;
+    [self.backgroundView addSubview:loadView];
+    [loadView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.backgroundView);
+    }];
+}
+
+/// 注册头部
+/// @param header <#header description#>
+- (void)registerRefreshHead:(MJRefreshHeader *) header{
+    self.tableView.mj_header = header;
+    self.selfManager.headRefresh = header;
+    @weakify(self);
+    [header setRefreshingBlock:^{
+        @strongify(self);
+        [self.dataLoader loadData:YES];
+    }];
+}
+
+/// 注册尾部
+/// @param footer <#footer description#>
+- (void)registerRefreshFoot:(MJRefreshFooter *) footer{
+    self.tableView.mj_footer = footer;
+    self.selfManager.footerRefresh = footer;
+    @weakify(self);
+    [footer setRefreshingBlock:^{
+        @strongify(self);
+        [self.dataLoader loadData:NO];
+    }];
+}
+
+- (void)loadData:(BOOL) isReSetData{
+    [self showLoadView];
+    [self.dataLoader loadData:isReSetData];
+}
+
+///展示加载
+- (void)showLoadView{
+    self.selfManager.loadView.hidden = NO;
+    self.selfManager.errorView.hidden = YES;
+    self.selfManager.emptyView.hidden = YES;
+}
+
+//隐藏加载视图
+- (void)hiddenLoadView{
+    self.selfManager.loadView.hidden = YES;
 }
 
 #pragma mark - UITableViewDelegate
@@ -184,28 +291,28 @@ UITableViewDataSource>
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (self.selfManager && [self.selfManager respondsToSelector:@selector(managerViewHeaderInSection:)]) {
-        [self.selfManager managerViewHeaderInSection:section];
+        return [self.selfManager managerViewHeaderInSection:section];
     }
     return [UIView new];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (self.selfManager && [self.selfManager respondsToSelector:@selector(managerHeightForHeaderInSection:)]) {
-        [self.selfManager managerHeightForHeaderInSection:section];
+        return [self.selfManager managerHeightForHeaderInSection:section];
     }
     return 0.01f;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     if (self.selfManager && [self.selfManager respondsToSelector:@selector(managerViewForFooterInSection:)]) {
-        [self.selfManager managerViewForFooterInSection:section];
+        return [self.selfManager managerViewForFooterInSection:section];
     }
     return [UIView new];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     if (self.selfManager && [self.selfManager respondsToSelector:@selector(managerHeightForFooterInSection:)]) {
-        [self.selfManager managerHeightForFooterInSection:section];
+        return [self.selfManager managerHeightForFooterInSection:section];
     }
     return 0.01f;
 }
@@ -255,5 +362,13 @@ UITableViewDataSource>
     }
     return _selfManager;
 }
+
+- (UIView *)backgroundView{
+    if (!_backgroundView) {
+        _backgroundView = [[UIView alloc] init];
+    }
+    return _backgroundView;
+}
+
 
 @end

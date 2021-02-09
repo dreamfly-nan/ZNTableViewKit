@@ -4,6 +4,7 @@ platform :ios, '8.0'
 
 target 'ZNTableViewKit_Example' do
   pod 'ZNTableViewKit', :path => '../'
+  pod 'MJRefresh'
 
   target 'ZNTableViewKit_Tests' do
     inherit! :search_paths

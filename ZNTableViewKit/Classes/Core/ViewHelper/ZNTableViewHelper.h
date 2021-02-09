@@ -53,7 +53,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 组头
 /// @param section <#section description#>
-- (UIView *)headViewWithSection:(NSInteger) section;
+- (UIView<BBSBaseViewProtocol> * __nullable)headViewWithSection:(NSInteger) section;
 
 /// 组尾的高度
 /// @param section <#section description#>
@@ -61,7 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 组尾
 /// @param section <#section description#>
-- (UIView *)footerViewWithSection:(NSInteger) section;
+- (UIView<BBSBaseViewProtocol> * __nullable)footerViewWithSection:(NSInteger) section;
 
 @end
 

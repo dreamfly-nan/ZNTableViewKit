@@ -18,7 +18,18 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+
+@protocol ZNTableViewKitDelegate <NSObject>
+
+@optional
+/// 网络请求数据加载完成
+- (void)loadDataFinish;
+
+@end
+
 @interface ZNTableViewKit : NSObject <ZNTableViewKitProtocol>
+
+@property(nonatomic , weak) id<ZNTableViewKitDelegate> bbsDelegate;
 
 /// 只传入数据源与tableView
 /// @param tableView <#tableView description#>
@@ -36,33 +47,54 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param viewHelper <#viewHelper description#>
 /// @param dataLoader <#dataLoader description#>
 /// @param tableView <#tableView description#>
-- (instancetype)initWithViewHelper:(id<ZNTableViewLayoutProtocol,
-                                    ZNTableViewLunchProtocol> ) viewHelper
-                        dataLoader:(id<ZNTableViewDataSourceProtocol>) dataLoader
+- (instancetype)initWithViewHelper:(id<BBSTableViewLayoutProtocol,
+                                    BBSTableViewLunchProtocol> ) viewHelper
+                        dataLoader:(id<BBSTableViewDataSourceProtocol>) dataLoader
                          tableView:(UITableView *) tableView;
 
 /// 当前tableview的处理对象
 /// @param tableView 主tableview
 /// @param manager 管理对象
 - (instancetype)initWithTableView:(UITableView *) tableView
-                          manager:(ZNTableViewManage *) manager;
+                          manager:(BBSTableViewManage *) manager;
 
 /// 注册对应的cell
 /// @param model <#model description#>
-- (void)addRegisterModel:(ZNRegisterModel *) model;
+- (void)addRegisterModel:(BBSRegisterModel *) model;
 
 /// 注册对应的cell
 /// @param models <#models description#>
-- (void)addRegisterModels:(NSArray<ZNRegisterModel *> *) models;
+- (void)addRegisterModels:(NSArray<BBSRegisterModel *> *) models;
 
 /// 添加策略
 /// @param strategyClass <#strategyClass description#>
-- (void)addRegisterStrategyWithClass:(id<ZNTableViewStrategyProtocol>) strategyClass;
+- (void)addRegisterStrategyWithClass:(id<BBSTableViewStrategyProtocol>) strategyClass;
 
 /// 添加事件
 /// @param action <#action description#>
-- (void)addAction:(id<ZNTableViewActionProtocol>) action;
+- (void)addAction:(id<BBSTableViewActionProtocol>) action;
 
+/// 空视图接入
+/// @param emptyView <#emptyView description#>=
+- (void)setEmptyView:(UIView*) emptyView;
+
+/// 错误视图接入
+/// @param errorView <#errorView description#>
+- (void)setErrorView:(UIView *) errorView;
+
+/// 加载图接入
+/// @param loadView <#loadView description#>
+- (void)setLoadView:(UIView *) loadView;
+
+/// 注册头部
+/// @param header <#header description#>
+- (void)registerRefreshHead:(MJRefreshHeader *) header;
+
+/// 注册尾部
+/// @param footer <#footer description#>
+- (void)registerRefreshFoot:(MJRefreshFooter *) footer;
+
+- (void)loadData:(BOOL) isReSetData;
 @end
 
 NS_ASSUME_NONNULL_END
